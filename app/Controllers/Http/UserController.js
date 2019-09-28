@@ -29,11 +29,10 @@ class UserController {
       password = user.openid
       let flag = DateJudger.compare(user.last_login, last_login)
       if(flag){
-        const current = DateGenerator.getNowFormatDate()
         user.score += 1
         user.last_login = last_login
         user.save()
-        await Score.create({user_id: user.id, date: current, value:1, info: '打卡签到'})
+        await Score.create({user_id: user.id, date: last_login, value:1, info: '打卡签到'})
       }
     }
     const token = await auth.attempt(user_id, password)
@@ -75,7 +74,7 @@ class UserController {
       member.score = 10
       member.save()
       const current = DateGenerator.getNowFormatDate()
-      await Score.create({user_id: user.id, 'date':current, value:10, info: '绑定用户'})
+      await Score.create({user_id: user.id, date:current, value:10, info: '绑定用户'})
       return response.status(200).json({
         data: member
       })

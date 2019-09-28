@@ -8,9 +8,9 @@ class ScoreSchema extends Schema {
     this.create('scores', (table) => {
       table.increments()
       table.integer('user_id').unsigned().references('id').inTable('users')
-      table.string('date', 32).notNullable()
+      table.string('date', 32)
       table.integer('value').notNullable()
-      table.string('info', 128).notNullable().defaultTo(this.fn.now())
+      table.string('info', 128).notNullable()
       table.timestamps()
     })
   }
