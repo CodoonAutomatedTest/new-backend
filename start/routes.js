@@ -50,4 +50,6 @@ Route.group(() => {
   // Feed
   Route.post('feed/create', 'FeedController.create').middleware('auth')
   Route.post('feed/type', 'FeedController.type').middleware('auth')
+  // Score
+  Route.get('score/info', 'ScoreController.index').middleware('auth')
 }).prefix('api')
