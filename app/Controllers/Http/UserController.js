@@ -75,7 +75,7 @@ class UserController {
       member.score = 10
       member.save()
       const current = DateGenerator.getNowFormatDate()
-      await Score.create({user_id: user.id, date:current, value:10, info: '绑定用户'})
+      await Score.create({user_id: user.id, 'date':current, value:10, info: '绑定用户'})
       return response.status(200).json({
         data: member
       })
