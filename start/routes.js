@@ -19,6 +19,7 @@ const Route = use('Route')
 Route.group(() => {
   // Login
   Route.post('auth/login', 'UserController.login')
+  Route.get('auth/token', 'UserController.token')
   // User
   Route.post('user/create', 'UserController.create').middleware('auth')
   Route.post('user/verify', 'UserController.verify').middleware('auth')

@@ -10,6 +10,11 @@ const appid = Env.get('APP_ID')
 const secret = Env.get('APP_SECRET')
 
 class UserController {
+  async token({ auth, request, response }) {
+    const res = await AccessToken(appid, secret)
+    return res
+  }
+
   async login({ auth, request, response }) {
     const { code, timestamp, shop } = request.all()
     var res = await OpenidCreater(appid, secret, code)
@@ -90,6 +95,23 @@ function OpenidCreater(appid, secret, code) {
   return new Promise(function (resolve, reject) {
     var option = {
       url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appid + '&secret=' + secret + '&js_code=' + code + '&grant_type=authorization_code',
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      }
+    }
+    request.get(option, function (err, response, body) {
+      if (err) reject(err);
+      resolve(JSON.parse(body));
+    })
+  })
+}
+
+function AccessToken(appid, secret) {
+  var request = require('request');
+  return new Promise(function (resolve, reject) {
+    var option = {
+      url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + appid + '&secret=' + secret,
       method: "GET",
       headers: {
         "content-type": "application/json",
