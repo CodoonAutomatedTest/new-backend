@@ -1,7 +1,6 @@
 class DateGenerator{
   getNowFormatDate() {
     var date = new Date();
-    date.setHours(date.getHours() + 8);
     var seperator1 = "-";
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
