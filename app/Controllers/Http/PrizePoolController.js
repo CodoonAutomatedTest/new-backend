@@ -10,6 +10,7 @@ class PrizePoolController {
       code,
       name,
       avatar,
+      head,
       prob,
       num
     })
