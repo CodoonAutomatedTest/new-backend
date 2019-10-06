@@ -3,7 +3,6 @@
 const Coupon = use('App/Models/Coupon')
 const PrizePool = use('App/Models/PrizePool')
 const DateGenerator = use('App/Services/DateGenerator')
-const DateJudger = use('App/Services/DateJudger')
 
 class CouponController {
   async index({auth}){
@@ -19,7 +18,7 @@ class CouponController {
 
   async create({auth, request, response}){
     const user = await auth.getUser()
-    const {name, avatar, code, timestamp} = request.all()
+    const {name, avatar, head, code, timestamp} = request.all()
     const coupon = new Coupon();
     let number = ''
     switch(code){
@@ -42,7 +41,7 @@ class CouponController {
         number = '00' + timestamp
     }
     let deadline = DateGenerator.generateFormatDate(15)
-    coupon.fill({name, avatar, number, deadline});
+    coupon.fill({name, avatar, head, number, deadline});
     await user.coupons().save(coupon)
     var pool = await PrizePool.findBy({code: code})
     pool.num -= 1

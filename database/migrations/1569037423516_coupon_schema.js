@@ -10,6 +10,7 @@ class CouponSchema extends Schema {
       table.integer('user_id').unsigned().references('id').inTable('users')
       table.string('name', 64).notNullable()
       table.string('avatar', 128)
+      table.string('head', 128)
       table.string('number', 24).notNullable()
       table.string('deadline', 32).notNullable()
       table.integer('status').defaultTo(0).notNullable()

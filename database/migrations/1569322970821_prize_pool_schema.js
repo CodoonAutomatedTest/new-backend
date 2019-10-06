@@ -9,7 +9,7 @@ class PrizePoolSchema extends Schema {
       table.increments()
       table.integer('code').notNullable().unique()
       table.string('name', 64).notNullable()
-      // table.string('head', 256).notNullable()
+      table.string('head', 256).notNullable()
       table.string('avatar', 256).notNullable()
       table.integer('prob').notNullable().defaultTo(0)
       table.integer('num').notNullable()
