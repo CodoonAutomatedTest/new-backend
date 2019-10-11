@@ -10,6 +10,12 @@ const appid = Env.get('APP_ID')
 const secret = Env.get('APP_SECRET')
 
 class UserController {
+  async query({ request, response }) {
+    const { card_id } = request.all()
+    var user = await User.findBy({'card_id': card_id})
+    return user
+  }
+
   async token({ auth, request, response }) {
     const res = await AccessToken(appid, secret)
     return res
