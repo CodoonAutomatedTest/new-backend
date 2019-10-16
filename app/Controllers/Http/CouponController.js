@@ -21,7 +21,7 @@ class CouponController {
     const { coupon_id } = request.all()
     let currentDate = DateGenerator.getNowFormatDate()
     const coupon = await Coupon.query().where('number', coupon_id).andWhere('deadline', '>=', currentDate).fetch()
-    if(coupon == []){
+    if(coupon == ''){
       return response.status(404).json({
         message: 'invaild id, check it please!'
       })
