@@ -41,7 +41,7 @@ Route.group(() => {
   Route.get('articles', 'ArticleController.index')
   Route.post('article/create', 'ArticleController.create').middleware('auth')
   // Coupon
-  Route.get('coupon/query', 'CouponController.query')
+  Route.post('coupon/query', 'CouponController.query')
   Route.get('coupon/index', 'CouponController.index').middleware('auth')
   Route.post('coupon/create', 'CouponController.create').middleware('auth')
   // Collection
