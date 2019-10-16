@@ -20,7 +20,7 @@ class CouponController {
   async query({ request, response }){
     const { coupon_id } = request.all()
     let currentDate = DateGenerator.getNowFormatDate()
-    const coupon = await Coupon.query().where('number', coupon_id).andWhere('deadline', '>=', currentDate).fetch()
+    const coupon = await Coupon.query().where('number', coupon_id).andWhere('status', 0).andWhere('deadline', '>=', currentDate).fetch()
     var context = coupon.toJSON()
     if(context == ''){
       return response.status(404).json({
