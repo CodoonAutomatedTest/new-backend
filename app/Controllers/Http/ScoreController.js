@@ -1,5 +1,7 @@
 'use strict'
 
+const User = use('App/Models/User')
+
 class ScoreController {
   async index ({auth}) {
     const user = await auth.getUser()
@@ -10,6 +12,9 @@ class ScoreController {
   async deal ({request, response}) {
     const {id, score} = request.all()
     let currentDate = DateGenerator.getNowFormatDate()
+    const user = await User.findBy({'id': id})
+    user.score += parseInt(score)
+    user.save()
     return await Score.create({user_id: id, 'current': currentDate, value:parseInt(score) , info: '消费积分'})
   }
 }
