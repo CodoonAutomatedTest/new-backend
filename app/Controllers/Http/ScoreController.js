@@ -1,6 +1,7 @@
 'use strict'
 
 const User = use('App/Models/User')
+const DateGenerator = use('App/Services/DateGenerator')
 
 class ScoreController {
   async index ({auth}) {
