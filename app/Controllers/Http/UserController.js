@@ -13,7 +13,7 @@ class UserController {
   async query({ request, response }) {
     const { card_id } = request.all()
     var user = await User.findBy({'card_id': card_id})
-    return user
+    return {'id': user.id, 'user_id': user.user_id, 'card_id': user.card_id, 'nickName': user.nickName, 'phone': user.phone, 'type': user.type}
   }
 
   async token({ auth, request, response }) {

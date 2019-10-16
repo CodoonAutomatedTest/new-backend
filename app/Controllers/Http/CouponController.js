@@ -1,6 +1,7 @@
 'use strict'
 
 const Coupon = use('App/Models/Coupon')
+const User = use('App/Models/User')
 const PrizePool = use('App/Models/PrizePool')
 const DateGenerator = use('App/Services/DateGenerator')
 
@@ -14,6 +15,26 @@ class CouponController {
       used: await user.coupons().where('status', 1).whereNot('name', '继续加油').fetch(),
       expired: await user.coupons().where('status', 2).whereNot('name', '继续加油').fetch()
     }
+  }
+
+  async query({ request, response }){
+    const { coupon_id } = request.all()
+    const coupon = await Coupon.findBy({'number': coupon_id})
+    if(!coupon){
+      return response.status(401).json({
+        message: 'invaild id, check it please!'
+      })
+    }
+    const user = await User.findBy({'id': coupon.user_id})
+    return response.status(200).json({
+      'id': user.id,
+      'user_id': user.user_id,
+      'card_id': user.card_id,
+      'nickName': user.nickName,
+      'phone': user.phone,
+      'type': user.type,
+      'coupon': coupon
+    })
   }
 
   async create({auth, request, response}){
