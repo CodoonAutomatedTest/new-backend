@@ -21,27 +21,22 @@ class CouponController {
     const { coupon_id } = request.all()
     let currentDate = DateGenerator.getNowFormatDate()
     const coupon = await Coupon.query().where('number', coupon_id).andWhere('deadline', '>=', currentDate).fetch()
-    if(coupon == ''){
-      return response.status(403).json({
-        message: 'null'
-      })
-    }
-    if(coupon.length == ''){
+    var context = coupon.toJSON()
+    if(context == ''){
       return response.status(404).json({
         message: 'invaild id, check it please!'
       })
     }
-    return coupon.length
-    // const user = await User.findBy({'id': coupon.user_id})
-    // return response.status(200).json({
-    //   'id': user.id,
-    //   'user_id': user.user_id,
-    //   'card_id': user.card_id,
-    //   'nickName': user.nickName,
-    //   'phone': user.phone,
-    //   'type': user.type,
-    //   'coupon': coupon
-    // })
+    const user = await User.findBy({'id': context.user_id})
+    return response.status(200).json({
+      'id': user.id,
+      'user_id': user.user_id,
+      'card_id': user.card_id,
+      'nickName': user.nickName,
+      'phone': user.phone,
+      'type': user.type,
+      'coupon': coupon
+    })
   }
 
   async create({auth, request, response}){
