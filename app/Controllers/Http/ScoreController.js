@@ -1,6 +1,7 @@
 'use strict'
 
 const User = use('App/Models/User')
+const Score = use('App/Models/Score')
 const DateGenerator = use('App/Services/DateGenerator')
 
 class ScoreController {
