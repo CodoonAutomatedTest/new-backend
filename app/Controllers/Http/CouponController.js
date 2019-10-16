@@ -72,6 +72,14 @@ class CouponController {
     pool.save()
     return coupon
   }
+
+  async verifying ({request, response}) {
+    const coupon = request.all()
+    const object = await Coupon.findBy({'number': coupon.number})
+    object.status = 1
+    object.save()
+    return object
+  }
 }
 
 module.exports = CouponController
