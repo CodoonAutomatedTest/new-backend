@@ -27,8 +27,8 @@ class CouponController {
         message: 'invaild id, check it please!'
       })
     }
-    console.log(context)
-    const user = await User.findBy({'id': context['user_id']})
+    return context.user_id
+    const user = await User.findBy({'id': coupon.user_id})
     return response.status(200).json({
       'id': user.id,
       'user_id': user.user_id,
