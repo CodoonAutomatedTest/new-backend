@@ -27,7 +27,7 @@ class CouponController {
         message: 'invaild id, check it please!'
       })
     }
-    return typeof context
+    context = JSON.parse(context)
     const user = await User.findBy({'id': coupon.user_id})
     return response.status(200).json({
       'id': user.id,
