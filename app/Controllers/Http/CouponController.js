@@ -19,7 +19,8 @@ class CouponController {
 
   async query({ request, response }){
     const { coupon_id } = request.all()
-    const coupon = await Coupon.findBy({'number': coupon_id})
+    let currentDate = DateGenerator.getNowFormatDate()
+    const coupon = await Coupon.findBy({'number': coupon_id, 'deadline': {$gte:currentDate}})
     if(!coupon){
       return response.status(404).json({
         message: 'invaild id, check it please!'
