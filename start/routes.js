@@ -56,7 +56,7 @@ Route.group(() => {
   Route.post('feed/type', 'FeedController.type').middleware('auth')
   // Score
   Route.get('score/info', 'ScoreController.index').middleware('auth')
-  Route.get('score/deal', 'ScoreController.deal')
+  Route.post('score/deal', 'ScoreController.deal')
   // Helper
   Route.post('helper/add', 'HelperController.create').middleware('auth')
 }).prefix('api')
