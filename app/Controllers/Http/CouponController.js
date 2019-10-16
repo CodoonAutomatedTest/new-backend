@@ -26,7 +26,7 @@ class CouponController {
         message: 'invaild id, check it please!'
       })
     }
-    return coupon
+    return coupon.length
     // const user = await User.findBy({'id': coupon.user_id})
     // return response.status(200).json({
     //   'id': user.id,
