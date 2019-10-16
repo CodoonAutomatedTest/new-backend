@@ -25,17 +25,16 @@ class CouponController {
         message: 'invaild id, check it please!'
       })
     }
-    return coupon
-    // const user = await User.findBy({'id': coupon.user_id})
-    // return response.status(200).json({
-    //   'id': user.id,
-    //   'user_id': user.user_id,
-    //   'card_id': user.card_id,
-    //   'nickName': user.nickName,
-    //   'phone': user.phone,
-    //   'type': user.type,
-    //   'coupon': coupon
-    // })
+    const user = await User.findBy({'id': coupon.user_id})
+    return response.status(200).json({
+      'id': user.id,
+      'user_id': user.user_id,
+      'card_id': user.card_id,
+      'nickName': user.nickName,
+      'phone': user.phone,
+      'type': user.type,
+      'coupon': coupon
+    })
   }
 
   async create({auth, request, response}){
