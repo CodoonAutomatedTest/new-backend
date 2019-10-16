@@ -21,7 +21,7 @@ class CouponController {
     const { coupon_id } = request.all()
     const coupon = await Coupon.findBy({'number': coupon_id})
     if(!coupon){
-      return response.status(401).json({
+      return response.status(404).json({
         message: 'invaild id, check it please!'
       })
     }
