@@ -47,9 +47,9 @@ class UserController {
       }
     }
     const token = await auth.attempt(user_id, password)
-    user.token = token
     return response.status(200).json({
       data: user,
+      token: token,
       session_key: session_key
     })
   }
